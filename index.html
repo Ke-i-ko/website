@@ -26,8 +26,9 @@
     <br>
     <table id="table">
     </table>
-    <script>
-      function generateTable() {
+  <script>
+        function generateTable(event) {
+        event.preventDefault();
         var tableNum = document.getElementById("tableNum").value;
         var table = document.getElementById("table");
         table.innerHTML = "";
