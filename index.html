@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Times Tables Practice</title>
+    <title>Multiplication Tables Practice</title>
   </head>
   <body>
-    <h1>Times Tables Practice</h1>
+    <h1>Multiplication Tables Practice</h1>
     <form>
       <label>Select the table you want to practice:</label>
       <select id="tableNum">
@@ -18,16 +18,15 @@
         <option value="8">8</option>
         <option value="9">9</option>
         <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
       </select>
-      <button onclick="generateTable()">Practice</button>
+      <button id="generateTable">Practice</button>
     </form>
     <br>
     <table id="table">
     </table>
-  <script>
-        function generateTable(event) {
+    <script>
+      var generateTableButton = document.getElementById("generateTable");
+      generateTableButton.addEventListener("click", function(event){
         event.preventDefault();
         var tableNum = document.getElementById("tableNum").value;
         var table = document.getElementById("table");
@@ -41,7 +40,7 @@
           cell2.innerHTML = "=";
           cell3.innerHTML = tableNum * i;
         }
-      }
+      });
     </script>
   </body>
 </html>
