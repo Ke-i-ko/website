@@ -78,6 +78,7 @@
       var practiceBtn = document.getElementById("practiceBtn");
       var feedback = document.getElementById("feedback");
       practiceBtn.addEventListener("click", function() {
+            event.preventDefault();
         var num = document.getElementById("num").value;
         var table = document.getElementById("table");
         table.innerHTML = "";
