@@ -1,2 +1,2 @@
 # website
-Luminarism website hosting test.
+luminarism website hosting experimentation
