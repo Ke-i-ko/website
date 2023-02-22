@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TIG</title>
+	<title>Image Gallery</title>
 	<style>
 		body {
 			margin: 0;
@@ -66,7 +66,7 @@
 	</style>
 </head>
 <body>
-	<h1>TIG</h1>
+	<h1>Image Gallery</h1>
 	<div class="gallery">
 		<!-- Dynamic generation of image tags -->
 	</div>
@@ -100,19 +100,27 @@
 		const imgFolder = 'img/';
 		const imgExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
 		
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', imgFolder);
-		xhr.onload = () => {
-			if (xhr.status === 200) {
-				const filenames = xhr.response.split('\n');
-				for (const filename of filenames) {
-					const extension = filename.substring(filename.lastIndexOf('.')).toLowerCase();
-					if (imgExtensions.includes(extension)) {
-						const img = document.createElement('img');
-								img.src = imgFolder + filename;
-								img.alt = "Image " + filename;
-								gallery.appendChild(img);
+		function updateGallery() {
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', imgFolder);
+			xhr.onload = () => {
+				if (xhr.status === 200) {
+					const filenames = xhr.response.split('\n');
+					for (const filename of filenames) {
+						const extension = filename.substring(filename.lastIndexOf('.')).toLowerCase();
+						if (imgExtensions.includes(extension)) {
+							const img = document.createElement('img');
+							img.src = imgFolder + filename;
+							img.alt = filename;
+							gallery.appendChild(img);
+						}
 					}
 				}
-			}
+			};
+			xhr.send();
 		}
+		
+		updateGallery();
+
+		// Check for new images every 5 seconds
+	
