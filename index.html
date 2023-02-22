@@ -101,24 +101,24 @@
 		const imgExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
 		
 		function updateGallery() {
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', imgFolder);
-			xhr.onload = () => {
-				if (xhr.status === 200) {
-					const filenames = xhr.response.split('\n');
-					for (const filename of filenames) {
-						const extension = filename.substring(filename.lastIndexOf('.')).toLowerCase();
-						if (imgExtensions.includes(extension)) {
-							const img = document.createElement('img');
-							img.src = imgFolder + filename;
-							img.alt = filename;
-							gallery.appendChild(img);
-						}
-					}
-				}
-			};
-			xhr.send();
-		}
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', imgFolder);
+    xhr.onload = () => {
+        if (xhr.status === 200) {
+            const filenames = xhr.response.split('/');
+            for (const filename of filenames) {
+                const extension = filename.substring(filename.lastIndexOf('.')).toLowerCase();
+                if (imgExtensions.includes(extension)) {
+                    const img = document.createElement('img');
+                    img.src = imgFolder + filename;
+                    img.alt = filename;
+                    gallery.appendChild(img);
+                }
+            }
+        }
+    };
+    xhr.send();
+}
 		
 		updateGallery();
 
