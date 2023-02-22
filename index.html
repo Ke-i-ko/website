@@ -122,5 +122,27 @@
 		
 		updateGallery();
 
-		// Check for new images every 5 seconds
+// Poll the server for changes to the img folder every 5 seconds
+setInterval(() => {
+		const latestImage = gallery.lastChild;
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', imgFolder);
+		xhr.onload = () => {
+			if (xhr.status === 200) {
+				const filenames = xhr.response.split('\n');
+				const latestFilename = filenames[filenames.length - 2];
+				if (latestFilename !== latestImage.alt) {
+					const extension = latestFilename.substring(latestFilename.lastIndexOf('.')).toLowerCase();
+					if (imgExtensions.includes(extension)) {
+						const img = document.createElement('img');
+						img.src = imgFolder + latestFilename;
+						img.alt = latestFilename;
+						gallery.appendChild(img);
+					}
+				}
+			}
+		};
+		xhr.send();
+	}, 5000);
+</script>
 	
